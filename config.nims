@@ -7,7 +7,7 @@ from macros import error
 --opt:size
 --parallelBuild:0
 --threads:on
---verbosity:0
+--verbosity:1
 --passC:"-flto"
 --passL:"-flto"
 

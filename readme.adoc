@@ -1,0 +1,5 @@
+= Nithello
+
+an implementation of Othello, but written in Nim.
+
+_more to come_
