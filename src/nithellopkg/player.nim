@@ -10,6 +10,17 @@ type
     None  = (0, "-")
     Black = (1, "B")
 
+
+proc `-`*(c: Color): Color =
+  ## Inverts the Color given to the opposite.
+  if c == Black:
+    result = White
+  elif c == White:
+    result = Black
+  else:
+    result = None
+
+
 type
   Player* = object
     color:    Color
@@ -17,6 +28,7 @@ type
     human:    bool
     passing:  bool
     # score: int
+
 
 proc initPlayer*(#[p: var Player]#c: Color, human: bool): Player =
   result = Player(color: c, numDiscs: 0, human: human, passing: false)

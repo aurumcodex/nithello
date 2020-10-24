@@ -6,6 +6,8 @@
 
 import tables
 
+const BoardSize* = 64
+
 const
   North* = -8
   South* =  8
@@ -65,3 +67,8 @@ const DirMap* = {
     SEast: "South East",
     SWest: "South West",
   }.toTable
+
+
+proc getRow*(x: int): int =
+  result = (x div 8) + 1
+  

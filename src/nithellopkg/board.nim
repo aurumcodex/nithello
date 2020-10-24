@@ -31,5 +31,3 @@ proc setup*(c: Color): Board =
     board: brd,
     gameOver: false
   )
-
-  # discard
