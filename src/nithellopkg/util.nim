@@ -1,13 +1,18 @@
 ##[
   util.nim
-  
+  ========
+
   module to hold various utility functions and to hold various constants.
 ]##
 
 import strformat
 import tables
 
-const BoardSize* = 64
+const
+  BoardSize* = 64
+  MaxDepth* = 13
+  MaxInt* = 1 shl (sizeof uint) - 1
+  MinInt* = -MaxInt - 1
 
 const
   North* = -8

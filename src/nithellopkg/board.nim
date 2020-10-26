@@ -1,5 +1,6 @@
 ##[
   board.nim
+  =========
 
   module to hold data about the playing board.
 ]##
@@ -18,9 +19,6 @@ type
     bot*:    Player
     board*:  array[64, Color]
     gameOver*: bool
-
-
-# include moves
 
 
 proc setup*(c: Color): Board =
@@ -111,7 +109,7 @@ proc generateMoves*(b: Board, c: Color): seq[Move] =
 
 
 proc print*(b: Board, moveset: seq[Move]) =
-  ## print out the board in an easy to read 2D format
+  ## print out the board in an easy to read 2D format (with moves)
   let cells = getCells(moveset)
 
   echo fmt"bot is {b.bot.color} | player is {b.player.color}"
@@ -127,6 +125,26 @@ proc print*(b: Board, moveset: seq[Move]) =
       printColor i, c
 
 
+proc print*(b: Board) =
+  ## print out the board in an easy to read 2D format (without moves)
+  # let cells = getCells(moveset)
+
+  echo fmt"bot is {b.bot.color} | player is {b.player.color}"
+  echo "  ._a_b_c_d_e_f_g_h_"
+
+  for i, c in b.board:
+    if i mod 8 == 0:
+      stdout.write fmt"{getRow(i)} |"
+    # # if cells.contains(i):
+    #   printChar i, "-"
+      printColor i, c
+      continue
+    else:
+      printColor i, c
+
+
 proc isGameOver*(b: Board): bool =
   result = b.player.passing and b.bot.passing
 
+
+include formula

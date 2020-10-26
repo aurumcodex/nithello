@@ -1,5 +1,6 @@
 ##[
   nithello.nim
+  ============
 
   main application file; runs othello game.
 ]##
@@ -8,22 +9,23 @@ import strformat
 
 import nithellopkg/player
 import nithellopkg/board
+import nithellopkg/util
 
 
 proc nithello() =
   ## Main function to run the Othello game.
   var game: Board
   game = setup Black
-  var moveset = generateMoves(game, game.player.color)
-  print game, moveset
+  var moveset = game.generateMoves(game.player.color)
+  print game
   echo "henlo"
-
-  # var counter = 0
-  # for j in game.board:
-  #   echo typeof counter
-  #   echo fmt"{counter}: {j}"
-  #   inc counter
-    
+  echo fmt"MaxInt is: {MaxInt}"
+  echo fmt"MinInt is: {MinInt}"
+  var temp = game
+  print temp
+  echo ""
+  echo game
+  echo temp
 
 
 when isMainModule:

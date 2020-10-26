@@ -1,5 +1,6 @@
 ##[
   player.nim
+  ==========
 
   module for the data that a player would need for the game.
 ]##
@@ -129,3 +130,6 @@ proc getPassInput*(p, o: var Player) =
     if p.human:
       echo "invalid option found; please re-enter"
       p.getPassInput(o)
+
+
+include bot

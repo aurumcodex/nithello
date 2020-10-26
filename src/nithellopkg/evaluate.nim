@@ -1,5 +1,6 @@
 ##[
   evaluate.nim
+  ============
 
   module to contain various hueristic procs for the search algorithms.
 ]##
@@ -12,9 +13,9 @@ from util import `++`
 
 type
   Scores* = object
-    black: int
-    white: int
-    score: int
+    black*: int
+    white*: int
+    score*: int
 
 
 proc calculateScores*(b: Board): Scores =
@@ -31,7 +32,7 @@ proc calculateScores*(b: Board): Scores =
     of None:
       discard
   
-  var score = blackCount - whiteCount
+  let score = blackCount - whiteCount
 
   result = Scores(black: blackCount, white: whiteCount, score: score)
 
