@@ -4,6 +4,7 @@
   module to hold various utility functions and to hold various constants.
 ]##
 
+import strformat
 import tables
 
 const BoardSize* = 64
@@ -36,25 +37,25 @@ const
   ]
 
 const Rows* = {
-    "a": 0,
-    "b": 1,
-    "c": 2,
-    "d": 3,
-    "e": 4,
-    "f": 5,
-    "g": 6,
-    "h": 7,
+    'a': 0,
+    'b': 1,
+    'c': 2,
+    'd': 3,
+    'e': 4,
+    'f': 5,
+    'g': 6,
+    'h': 7,
   }.toTable
 
 const Columns* = {
-    "1": 0,
-    "2": 1,
-    "3": 2,
-    "4": 3,
-    "5": 4,
-    "6": 5,
-    "7": 6,
-    "8": 7,
+    '1': 0,
+    '2': 1,
+    '3': 2,
+    '4': 3,
+    '5': 4,
+    '6': 5,
+    '7': 6,
+    '8': 7,
   }.toTable
 
 const DirMap* = {
@@ -69,6 +70,20 @@ const DirMap* = {
   }.toTable
 
 
+proc printChar*(i: int, s: string) =
+  if i mod 8 == 7:
+    echo fmt" {s}\n"
+  else:
+    stdout.write fmt" {s}"
+
+
 proc getRow*(x: int): int =
   result = (x div 8) + 1
-  
+
+
+proc isEmpty*(l: seq[int]): bool =
+  result = l.len == 0
+
+
+proc `++`*(i: var int) =
+  inc i

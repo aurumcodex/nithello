@@ -4,18 +4,27 @@
   main application file; runs othello game.
 ]##
 
-# import nithellopkg/modules
+import strformat
+
 import nithellopkg/player
 import nithellopkg/board
 
-# const blk = Black
 
 proc nithello() =
   ## Main function to run the Othello game.
   var game: Board
-  game = setup(Black)
-  echo game
+  game = setup Black
+  var moveset = generateMoves(game, game.player.color)
+  print game, moveset
   echo "henlo"
+
+  # var counter = 0
+  # for j in game.board:
+  #   echo typeof counter
+  #   echo fmt"{counter}: {j}"
+  #   inc counter
+    
+
 
 when isMainModule:
   import cligen
