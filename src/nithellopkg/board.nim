@@ -148,3 +148,4 @@ proc isGameOver*(b: Board): bool =
 
 
 include formula
+include bot # was in player.nim, but due to a recursion in dependency, would fail to compile

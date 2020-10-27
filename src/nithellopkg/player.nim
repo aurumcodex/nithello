@@ -130,6 +130,3 @@ proc getPassInput*(p, o: var Player) =
     if p.human:
       echo "invalid option found; please re-enter"
       p.getPassInput(o)
-
-
-include bot
