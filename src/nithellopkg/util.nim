@@ -50,7 +50,7 @@ const Rows* = {
     'f': 5,
     'g': 6,
     'h': 7,
-  }.toTable
+  }.toOrderedTable
 
 const Columns* = {
     '1': 0,
@@ -61,7 +61,7 @@ const Columns* = {
     '6': 5,
     '7': 6,
     '8': 7,
-  }.toTable
+  }.toOrderedTable
 
 const DirMap* = {
     North: "North",

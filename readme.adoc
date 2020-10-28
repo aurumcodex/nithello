@@ -2,4 +2,7 @@
 
 an implementation of Othello, but written in Nim.
 
-_more to come_
+.algorithms implemented
+* minmax w/ alpha-beta pruning
+* negamax (w/ alpha-beta pruning)
+* rng move generation

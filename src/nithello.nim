@@ -6,6 +6,7 @@
 ]##
 
 import strformat
+import tables
 
 import nithellopkg/player
 import nithellopkg/board
@@ -26,6 +27,8 @@ proc nithello() =
   echo ""
   echo game
   echo temp
+  for d, j in Rows.pairs:
+    echo fmt"{d} {j}"
 
 
 when isMainModule:
