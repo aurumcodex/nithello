@@ -68,21 +68,21 @@ proc flipDiscs*(b: var Board, color: Color, dir, cell: int, debug: bool) =
         b.board[temp] = color
 
 
-proc getLegalMove*(b: Board, index, dir: int, color: Color): Move =
+proc getLegalMove*(b: Board, index: var int, dir: int, color: Color): Move =
   var
     flips = 0
-    i = index
+    # i = index
     # d = dir
-    m = Move()
+    m = Move(cell: 0, numFlips: 0, direction: North)
     wall = false
 
   # block checking:
-  while i >= 0 and i < BoardSize and not wall:
+  while index >= 0 and index < BoardSize and not wall:
     wall = checkDir(index, dir)
-    i += dir
+    index += dir
 
-    if i >= 0 and i < BoardSize:
-      if b.board[i] != -color:
+    if index >= 0 and index < BoardSize:
+      if b.board[index] != -color:
         break #[checking]#
       else:
         inc flips
@@ -90,7 +90,7 @@ proc getLegalMove*(b: Board, index, dir: int, color: Color): Move =
       flips = 0
       break #[checking]#
 
-  if i >= 0 and i < BoardSize:
+  if index >= 0 and index < BoardSize:
     if b.board[index] == None and flips != 0:
       m.cell = index
       m.numFlips = flips
@@ -103,7 +103,9 @@ proc generateMoves*(b: Board, c: Color): seq[Move] =
   for i, val in b.board:
     if val == c:
       for d in Directions:
-        var m: Move = getLegalMove(b, i, d, c)
+        var
+          i = i
+          m: Move = getLegalMove(b, i, d, c)
         if m.numFlips != 0 and not checkBorder(m):
           result.add(m)
 
