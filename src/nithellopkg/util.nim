@@ -113,7 +113,7 @@ const DirMap* = {
 
 proc printChar*(i: int, s: string) =
   if i mod 8 == 7:
-    echo fmt" {s}\n"
+    echo fmt" {s}"
   else:
     stdout.write fmt" {s}"
 
