@@ -13,7 +13,7 @@ import board
 import moves
 import player
 
-from util import MaxInt, MinInt, MaxDepth
+from util import MaxInt, MinInt, MaxDepth, `-`
 
 type
   MoveType {.pure.} = enum
@@ -84,7 +84,7 @@ proc makeMove*(p: Player, moveset: seq[Move], game: Board, #[turnCount: int,]# d
         temp.apply(color, m.cell, debug)
         temp.flipDiscs(color, -m.direction, m.cell, debug)
 
-        var nmTemp = temp.negamax(alpha, beta, -color, MaxDepth, debug)
+        var nmTemp = temp.negamax(alpha, beta, -color, depth, debug)
 
         echo fmt"negamax output at cell {m.cell} :: {nmTemp}"
         nmTable[m.cell] = nmTemp

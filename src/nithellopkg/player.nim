@@ -60,12 +60,13 @@ proc getInput*(p: Player, cells: seq[int], human: bool): int =
 
   stdout.write "enter a move (color, column, row): "
   var input = readLine stdin 
-  input.stripLineEnd
-  echo input
+  # input.stripLineEnd
+  var stripInput = input.split(" ")
+  echo stripInput
   # input = input.strip
-  if input[0] == 'B' and p.color == Black and not cells.isEmpty and input.len > 1:
-    row = Rows[input[2]]
-    col = Columns[input[1]]
+  if stripInput[0] == "B" and p.color == Black and not cells.isEmpty and input.len > 1:
+    row = Rows[stripInput[2]]
+    col = Columns[stripInput[1]]
     m = (row * 8) + col
 
     if not cells.contains(m):
@@ -76,9 +77,9 @@ proc getInput*(p: Player, cells: seq[int], human: bool): int =
         echo "invalid move entered"
         quit 1
 
-  elif input[0] == 'W' and p.color == White and not cells.isEmpty and input.len > 1:
-    row = Rows[input[2]]
-    col = Columns[input[1]]
+  elif stripInput[0] == "W" and p.color == White and not cells.isEmpty and input.len > 1:
+    row = Rows[stripInput[2]]
+    col = Columns[stripInput[1]]
     m = (row * 8) + col
 
     if not cells.contains(m):

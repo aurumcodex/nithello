@@ -14,7 +14,7 @@ import moves
 
 from evaluate import Scores, calculateScores
 from player import Color, `-`#[, Player]#
-from util import MaxDepth, MaxInt, MinInt, BoardSize
+from util import MaxDepth, MaxInt, MinInt, BoardSize, `-`
 
 
 proc alphaBeta*(b: Board, alpha, beta: var float64, player: Color, depth: int, maxing, debug: bool): int =
@@ -24,7 +24,7 @@ proc alphaBeta*(b: Board, alpha, beta: var float64, player: Color, depth: int, m
     moveset: seq[Move]
 
   if debug:
-    echo fmt"moves available: {moveCount} | depth = {depth}"
+    echo fmt"(alpha-beta) moves available: {moveCount} | depth = {depth}"
 
   if depth == MaxDepth:
     if debug:
@@ -91,10 +91,11 @@ proc negamax*(b: Board, alpha, beta: var float64, player: Color, depth: int, deb
   beta = swap
 
   if debug:
-    echo fmt"moves available: {moveCount} | depth = {depth}"
+    echo fmt"(negamax) moves available: {moveCount} | depth = {depth}"
   
-  if depth == 0:
-    result = player.int * b.calculateScores.score
+  if depth == MaxDepth:
+    # result = player.int * b.calculateScores.score
+    return player.int * b.calculateScores.score
 
   for m in moveset:
     if debug:
@@ -104,7 +105,9 @@ proc negamax*(b: Board, alpha, beta: var float64, player: Color, depth: int, deb
     temp.apply(player, m.cell, debug)
     temp.flipDiscs(player, -m.direction, m.cell, debug)
 
-    bestMove = max(bestMove, -temp.negamax(beta, alpha, -player, depth-1, debug))
+    var value = -1*temp.negamax(beta, alpha, -player, depth+1, debug)
+
+    bestMove = max(bestMove, value)
     alpha = max(alpha, bestMove.float64)
 
     if alpha >= beta:
