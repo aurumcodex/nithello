@@ -52,11 +52,11 @@ proc apply*(b: var Board, color: Color, cell: int, debug: bool) =
       echo fmt"cell is now: {b.board[cell]}"
 
 
-proc flipDiscs*(b: var Board, color: Color, dir, cell: int, debug: bool) =
+proc flipDiscs*(b: var Board, color: Color, dir: Direction, cell: int, debug: bool) =
   var temp = cell
 
   while temp >= 0 and cell < 64:
-    temp = temp + dir
+    temp = temp + ord dir
 
     if debug:
       echo fmt"cell is now: {temp}"
@@ -68,7 +68,7 @@ proc flipDiscs*(b: var Board, color: Color, dir, cell: int, debug: bool) =
         b.board[temp] = color
 
 
-proc getLegalMove*(b: Board, index: var int, dir: int, color: Color): Move =
+proc getLegalMove*(b: Board, index: var int, dir: Direction, color: Color): Move =
   var
     flips = 0
     # i = index
@@ -79,7 +79,7 @@ proc getLegalMove*(b: Board, index: var int, dir: int, color: Color): Move =
   # block checking:
   while index >= 0 and index < BoardSize and not wall:
     wall = checkDir(index, dir)
-    index += dir
+    index += ord dir
 
     if index >= 0 and index < BoardSize:
       if b.board[index] != -color:

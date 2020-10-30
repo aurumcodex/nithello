@@ -8,21 +8,54 @@
 import strformat
 import tables
 
+type
+  Direction* {.pure.} = enum
+    NWest = (-9, "NW")
+    North = (-8, "N")
+    NEast = (-7, "NE")
+    West  = (-1, "W")
+    East  = (1, "E")
+    SWest = (7, "SW")
+    South = (8, "S")
+    SEast = (9, "SE")
+
+
+proc `-`*(d: Direction): Direction =
+  case d:
+    of NWest:
+      result = SEast
+    of North:
+      result = South
+    of NEast:
+      result = SWest
+    of West:
+      result = East
+    of East:
+      result = West
+    of SWest:
+      result = NEast
+    of South:
+      result = North
+    of SEast:
+      result = NWest
+
+
+# const # need to think about making this an enum
+#   North* = -8
+#   South* =  8
+#   East*  =  1
+#   West*  = -1
+#   NEast* = -7
+#   NWest* = -9
+#   SEast* =  9
+#   SWest* =  7
+
 const
   BoardSize* = 64
   MaxDepth* = 13
   MaxInt* = 1 shl (sizeof uint) - 1
   MinInt* = -MaxInt - 1
 
-const
-  North* = -8
-  South* =  8
-  East*  =  1
-  West*  = -1
-  NEast* = -7
-  NWest* = -9
-  SEast* =  9
-  SWest* =  7
 
 const
   Directions*   = [North, South, East, West, NEast, NWest, SEast, SWest]
@@ -41,7 +74,8 @@ const
     150, -30,  30,   5,   5,  30,  -30, 150,
   ]
 
-const Rows* = {
+
+const Columns* = {
     'a': 0,
     'b': 1,
     'c': 2,
@@ -52,7 +86,8 @@ const Rows* = {
     'h': 7,
   }.toOrderedTable
 
-const Columns* = {
+
+const Rows* = {
     '1': 0,
     '2': 1,
     '3': 2,
@@ -62,6 +97,7 @@ const Columns* = {
     '7': 6,
     '8': 7,
   }.toOrderedTable
+
 
 const DirMap* = {
     North: "North",
@@ -80,6 +116,28 @@ proc printChar*(i: int, s: string) =
     echo fmt" {s}\n"
   else:
     stdout.write fmt" {s}"
+
+
+proc getCol*(x: int): char =
+  case x mod 8:
+    of 0:
+      result = 'a'
+    of 1:
+      result = 'b'
+    of 2:
+      result = 'c'
+    of 3:
+      result = 'd'
+    of 4:
+      result = 'e'
+    of 5:
+      result = 'f'
+    of 6:
+      result = 'g'
+    of 7:
+      result = 'h'
+    else:
+      result = '_'
 
 
 proc getRow*(x: int): int =

@@ -8,7 +8,7 @@
 import strformat, strutils
 
 from tables import `[]`
-from util import isEmpty, Rows, Columns
+from util import isEmpty, Rows, Columns, MaxInt
 
 
 type
@@ -21,12 +21,12 @@ type
 proc `-`*(c: Color): Color =
   ## Inverts the Color given to the opposite.
   case c:
-  of Black:
-    result = White
-  of White:
-    result = Black
-  else:
-    result = None
+    of Black:
+      result = White
+    of White:
+      result = Black
+    else:
+      result = None
 
 
 proc printColor*(i: int, c: Color) =
@@ -51,7 +51,7 @@ proc initPlayer*(c: Color, human: bool): Player =
 
 proc getInput*(p: Player, cells: seq[int], human: bool): int =
   var
-    m = 999 # arbitrary number for now
+    m = MaxInt # arbitrary number for now
     row = 0
     col = 0
   # if not cells.empty()
@@ -61,6 +61,7 @@ proc getInput*(p: Player, cells: seq[int], human: bool): int =
   stdout.write "enter a move (color, column, row): "
   var input = readLine stdin 
   input.stripLineEnd
+  echo input
   # input = input.strip
   if input[0] == 'B' and p.color == Black and not cells.isEmpty and input.len > 1:
     row = Rows[input[2]]
@@ -100,10 +101,10 @@ proc handleSkipBlack(p, o: var Player) =
     echo "you have no valid moves and need to pass. re-enter input"
     p.handleSkipBlack(o)
   case p.passing:
-  of true:
-    o.passing = true
-  of false:
-    p.passing = true
+    of true:
+      o.passing = true
+    of false:
+      p.passing = true
 
 
 proc handleSkipWhite(p, o: var Player) =
@@ -111,10 +112,10 @@ proc handleSkipWhite(p, o: var Player) =
     echo "you have no valid moves and need to pass. re-enter input"
     p.handleSkipBlack(o)
   case p.passing:
-  of true:
-    o.passing = true
-  of false:
-    p.passing = true
+    of true:
+      o.passing = true
+    of false:
+      p.passing = true
 
 
 proc getPassInput*(p, o: var Player) =
@@ -122,11 +123,11 @@ proc getPassInput*(p, o: var Player) =
   input.stripLineEnd
 
   case input:
-  of "b", "B":
-    p.handleSkipBlack(o)
-  of "w", "W":
-    p.handleSkipWhite(o)
-  else:
-    if p.human:
-      echo "invalid option found; please re-enter"
-      p.getPassInput(o)
+    of "b", "B":
+      p.handleSkipBlack(o)
+    of "w", "W":
+      p.handleSkipWhite(o)
+    else:
+      if p.human:
+        echo "invalid option found; please re-enter"
+        p.getPassInput(o)

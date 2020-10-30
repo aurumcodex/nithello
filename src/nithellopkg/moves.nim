@@ -8,17 +8,20 @@
 # from board import Board
 # from player import Color, `-`
 
+import strformat
+
 import util
 
+from player import Color
 
 type
   Move* = object
     cell*: int
     numFlips*: int
-    direction*: int
+    direction*: Direction
 
 
-proc checkDir*(id, dir: int): bool =
+proc checkDir*(id: int, dir: Direction): bool =
   # need to think about refactoring this somehow
   if dir == East and RightBorder.contains(id):
     result = true
@@ -58,3 +61,9 @@ proc getCells*(moveset: seq[Move]): seq[int] =
 
 proc getWeight*(m: Move): int =
   result = CellWeights[m.cell]
+
+
+proc print*(m: Move, c: Color) =
+  stdout.write fmt"{c} {getCol(m.cell)} {getRow(m.cell)} | "
+  stdout.write fmt"num flips: {m.numFlips} | "
+  echo fmt"direction: {m.direction}"

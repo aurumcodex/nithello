@@ -25,12 +25,12 @@ proc calculateScores*(b: Board): Scores =
 
   for c in b.board:
     case c:
-    of Black:
-      ++blackCount
-    of White:
-      ++whiteCount
-    of None:
-      discard
+      of Black:
+        ++blackCount
+      of White:
+        ++whiteCount
+      of None:
+        discard
   
   let score = blackCount - whiteCount
 
