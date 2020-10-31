@@ -6,13 +6,11 @@
   module to contain various search algorithms for the othello game.
 ]##
 
-import strformat
-import random
+import strformat, random
 
-import board
-import moves
+import board, moves
 
-from evaluate import Scores, calculateScores
+from evaluate import Scores, calculateScoresDisc
 from player import Color, `-`#[, Player]#
 from util import MaxDepth, MaxInt, MinInt, BoardSize, `-`
 
@@ -30,8 +28,7 @@ proc alphaBeta*(b: Board, alpha, beta: var float64, player: Color, depth: int, m
     if debug:
       echo fmt"hit max depth ({MaxDepth})"
     
-    var scores = b.calculateScores
-    bestMove = scores.score
+    bestMove = b.calculateScoresDisc.score
 
     if debug:
       print b
@@ -94,8 +91,8 @@ proc negamax*(b: Board, alpha, beta: var float64, player: Color, depth: int, deb
     echo fmt"(negamax) moves available: {moveCount} | depth = {depth}"
   
   if depth == MaxDepth:
-    # result = player.int * b.calculateScores.score
-    return player.int * b.calculateScores.score
+    result = player.int * b.calculateScoresDisc.score
+    # return player.int * b.calculateScoresDisc.score
 
   for m in moveset:
     if debug:
@@ -130,3 +127,4 @@ proc rngMove*(moveset: seq[Move], debug: bool): int =
     m = rand(BoardSize)
 
   result = m
+  

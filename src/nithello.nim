@@ -14,18 +14,25 @@ import nithellopkg/moves
 import nithellopkg/util
 
 
-proc nithello(human=true, threads=8, debug=false) =
+proc nithello(human=true, debug=false) =
   ## Plays a game of Othello - written in Nim
   var 
     game: Board
     turnCount = 0
     m = 0
+    testing: array[BoardSize, Color]
   
+  for c in low(testing)..high(testing):
+    echo c, testing[c]
+    echo fmt"{c}, {testing[c]}"
+
+  echo ""
   echo fmt"sizeof array of Table[int, int]: {sizeof Table[int, int]}"
   echo fmt"sizeof array of float64: {sizeof float64}"
   echo fmt"sizeof array of 64 Colors: {sizeof array[64, Color]}"
   echo fmt"sizeof array of Player: {sizeof Player}"
   echo fmt"sizeof array of Board: {sizeof Board}"
+  echo ""
 
   echo "what color do you want to play as? (black or white)"
   var input = stdin.readLine
@@ -117,7 +124,7 @@ proc nithello(human=true, threads=8, debug=false) =
 
   echo fmt"game has ended | turns taken: {turnCount}"
 
-  let scores = game.calculateScores
+  let scores = game.calculateScoresDisc
   printResults scores
 
 

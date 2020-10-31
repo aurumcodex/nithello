@@ -59,8 +59,8 @@ proc getCells*(moveset: seq[Move]): seq[int] =
     result.add(c.cell)
 
 
-proc getWeight*(m: Move): int =
-  result = CellWeights[m.cell]
+proc getWeight*(index: int): int =
+  result = CellWeights[index]
 
 
 proc print*(m: Move, c: Color) =

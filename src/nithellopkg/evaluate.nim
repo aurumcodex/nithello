@@ -8,6 +8,7 @@
 import strformat
 
 from board import Board
+from moves import getWeight
 from player import Color
 from util import `++`
 
@@ -18,7 +19,7 @@ type
     score*: int
 
 
-proc calculateScores*(b: Board): Scores =
+proc calculateScoresDisc*(b: Board): Scores =
   var
     blackCount = 0
     whiteCount = 0
@@ -32,6 +33,26 @@ proc calculateScores*(b: Board): Scores =
       of None:
         discard
   
+  let score = blackCount - whiteCount
+
+  result = Scores(black: blackCount, white: whiteCount, score: score)
+
+
+proc calculateScoresWeight*(b: Board): Scores =
+  var
+    blackCount = 0
+    whiteCount = 0
+
+  for i, c in b.board:
+    # var i = i
+    case c:
+      of Black:
+        blackCount += getWeight(i)
+      of White:
+        whiteCount += getWeight(i)
+      of None:
+        discard
+
   let score = blackCount - whiteCount
 
   result = Scores(black: blackCount, white: whiteCount, score: score)

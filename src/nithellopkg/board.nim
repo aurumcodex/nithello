@@ -7,9 +7,7 @@
 
 import strformat
 
-import player
-import moves
-import util
+import player, moves, util
 
 from util import printChar
 

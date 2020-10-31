@@ -5,18 +5,14 @@
   file to be included into player.nim for bot related functions.
 ]##
 
-import random
-import strformat
-import tables
+import random, strformat, tables
 
-import board
-import moves
-import player
+import board, moves, player
 
 from util import MaxInt, MinInt, MaxDepth, `-`
 
 type
-  MoveType {.pure.} = enum
+  MoveType {.pure, size: sizeof(char).} = enum
     Rng
     AlphaBeta
     Negamax
@@ -102,4 +98,3 @@ proc makeMove*(p: Player, moveset: seq[Move], game: Board, #[turnCount: int,]# d
       bestMove = rngMove(moveset, debug)
 
   result = bestMove
-  
