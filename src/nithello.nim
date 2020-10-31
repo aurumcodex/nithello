@@ -5,8 +5,7 @@
   main application file; runs othello game.
 ]##
 
-import strformat
-import tables
+import strformat, tables
 
 import nithellopkg/player
 import nithellopkg/board
@@ -22,6 +21,7 @@ proc nithello(human=true, threads=8, debug=false) =
     turnCount = 0
     m = 0
   
+  echo fmt"sizeof array of Table[int, int]: {sizeof Table[int, int]}"
   echo fmt"sizeof array of float64: {sizeof float64}"
   echo fmt"sizeof array of 64 Colors: {sizeof array[64, Color]}"
   echo fmt"sizeof array of Player: {sizeof Player}"

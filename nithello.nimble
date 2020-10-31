@@ -12,4 +12,4 @@ bin           = @["nithello"]
 
 requires "nim >= 1.4.0"
 requires "cligen >= 1.2.2"
-requires "weave"
+requires "weave > 0.4"

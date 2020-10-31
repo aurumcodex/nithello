@@ -102,3 +102,4 @@ proc makeMove*(p: Player, moveset: seq[Move], game: Board, #[turnCount: int,]# d
       bestMove = rngMove(moveset, debug)
 
   result = bestMove
+  
