@@ -22,6 +22,11 @@ proc nithello(human=true, threads=8, debug=false) =
     turnCount = 0
     m = 0
   
+  echo fmt"sizeof array of float64: {sizeof float64}"
+  echo fmt"sizeof array of 64 Colors: {sizeof array[64, Color]}"
+  echo fmt"sizeof array of Player: {sizeof Player}"
+  echo fmt"sizeof array of Board: {sizeof Board}"
+
   echo "what color do you want to play as? (black or white)"
   var input = stdin.readLine
 

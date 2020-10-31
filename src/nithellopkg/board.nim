@@ -14,7 +14,6 @@ import util
 from util import printChar
 
 type
-  BoardRef* = ref Board
   Board* = object
     player*: Player
     bot*:    Player

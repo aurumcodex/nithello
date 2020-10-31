@@ -12,7 +12,7 @@ from util import isEmpty, Rows, Columns, MaxInt
 
 
 type
-  Color* {.pure.} = enum
+  Color* {.pure, size: sizeof(char).} = enum
     White = (-1, "W")
     None  = (0, "-")
     Black = (1, "B")
@@ -39,14 +39,14 @@ proc printColor*(i: int, c: Color) =
 type
   Player* = object
     color*:    Color
-    numDiscs*: int
+    # numDiscs*: int
     human*:    bool
     passing*:  bool
     # score: int
 
 
 proc initPlayer*(c: Color, human: bool): Player =
-  result = Player(color: c, numDiscs: 0, human: human, passing: false)
+  result = Player(color: c, #[numDiscs: 0,]# human: human, passing: false)
 
 
 proc getInput*(p: Player, cells: seq[int], human: bool): int =
