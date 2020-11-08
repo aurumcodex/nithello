@@ -20,9 +20,9 @@ type
 
 
 proc makeMove*(p: Player, moveset: seq[Move], game: Board, #[turnCount: int,]# debug: bool): int =
-  randomize()
+  # randomize()
   var
-    rng = rand(20)
+    # rng = rand(20)
     bestMove = -1
     depth = 0
     maxing = true
@@ -30,19 +30,20 @@ proc makeMove*(p: Player, moveset: seq[Move], game: Board, #[turnCount: int,]# d
     beta = MaxInt.float64
     color = p.color
 
-  var moveType: MoveType
+  # var moveType: MoveType
+  let moveType = AlphaBeta
   # case turnCount:
-  case rng:
-    of 0..4:
-      moveType = Rng
-    of 5..9:
-      moveType = AlphaBeta
-    of 10..14:
-      moveType = Negamax
-    of 15..19:
-      moveType = MTDf
-    else:
-      moveType = Rng
+  # case rng:
+  #   of 0..4:
+  #     moveType = Rng
+  #   of 5..9:
+  #     moveType = AlphaBeta
+  #   of 10..14:
+  #     moveType = Negamax
+  #   of 15..19:
+  #     moveType = MTDf
+  #   else:
+  #     moveType = Rng
   
   case moveType:
     of Rng:

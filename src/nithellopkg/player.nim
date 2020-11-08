@@ -97,37 +97,33 @@ proc getInput*(p: Player, cells: seq[int], human: bool): int =
   result = m
 
 
-proc handleSkipBlack(p, o: var Player) =
-  if p.color != Black and p.human:
-    echo "you have no valid moves and need to pass. re-enter input"
-    p.handleSkipBlack(o)
-  case p.passing:
-    of true:
-      o.passing = true
-    of false:
-      p.passing = true
-
-
-proc handleSkipWhite(p, o: var Player) =
-  if p.color != White and p.human:
-    echo "you have no valid moves and need to pass. re-enter input"
-    p.handleSkipBlack(o)
-  case p.passing:
-    of true:
-      o.passing = true
-    of false:
-      p.passing = true
-
-
 proc getPassInput*(p, o: var Player) =
   var input = readLine stdin
   input.stripLineEnd
 
   case input:
     of "b", "B":
-      p.handleSkipBlack(o)
+      # p.handleSkipBlack(o)
+      if p.color != Black and p.human:
+        echo "you have no valid moves and need to pass. re-enter input"
+        p.getPassInput(o)
+      case p.passing:
+        of true:
+          o.passing = true
+        of false:
+          p.passing = true
+
     of "w", "W":
-      p.handleSkipWhite(o)
+      # p.handleSkipWhite(o)
+      if p.color != White and p.human:
+        echo "you have no valid moves and need to pass. re-enter input"
+        p.getPassInput(o)
+      case p.passing:
+        of true:
+          o.passing = true
+        of false:
+          p.passing = true
+
     else:
       if p.human:
         echo "invalid option found; please re-enter"

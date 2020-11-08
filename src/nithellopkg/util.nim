@@ -52,7 +52,7 @@ proc `-`*(d: Direction): Direction =
 
 const
   BoardSize* = 64
-  MaxDepth* = 15
+  MaxDepth* = 31
   MaxInt* = 1 shl (sizeof uint) - 1
   MinInt* = -MaxInt - 1
 
